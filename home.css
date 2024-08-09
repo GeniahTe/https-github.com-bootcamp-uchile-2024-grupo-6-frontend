@@ -1,0 +1,24 @@
+.principal_home {
+    display: grid;
+    grid-gap: 5px;
+    grid-template-columns: 1fr 3fr;
+    grid-template-areas:
+      "header  header"
+      "sidebar content"
+      "footer  footer";
+}
+
+header {
+    grid-area: header;
+    background-color: #401a7e;
+    display: flexbox;
+    padding: 20px;
+}
+
+article {
+    grid-area: content;
+    background-color: rgb(236, 230, 230);
+    display: flexbox;
+
+}
+

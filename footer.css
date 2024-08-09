@@ -1,0 +1,59 @@
+footer {
+    display: flex;
+    grid-area: footer;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    background-color: #401a7e;
+    width: 97%;
+    height: 30%;
+}
+
+.formasPago {
+    display: flex;
+    background-color: #6339a7;
+    border-radius: 2px;
+    border: 1px solid lightgray;
+    margin: auto;
+    width: 100%;
+    height: 50%;
+}
+
+.pago {
+    display: flex;
+    width: 30%;
+    height: 100%;
+    justify-content: center;
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+
+  img {
+    height: 50%;
+  }
+  
+.contentInfo {
+    display: flex;
+    background-color: #6339a7;
+    justify-content: flex-start;
+    border-radius: 2px;
+    border: 1px solid lightgray;
+    margin: 1px;
+    width: 100%;
+    height: 50%;
+  }
+
+.contentInfo-1 {
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+    width: 100%;
+    height: 50%;
+}
+
+.contentInfo-p {
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+    flex-wrap: wrap;
+    margin: auto;
+}
