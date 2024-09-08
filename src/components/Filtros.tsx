@@ -1,6 +1,36 @@
+import { useEffect, useState } from 'react';
 import '../styles/estilos_home.css'
+import CategoryElement from './CategoryElement';
 
+interface Category {
+    idGenero: string;
+    nombreGenero: string;
+    subGeneros: string[];
+}
 function Filtros() {
+  const [category, setCategory] = useState<Category[]>([]);
+  const headers = new Headers();
+
+  headers.append('Content-Type', 'application/json');
+  headers.append('Accept', 'application/json');
+  headers.append('Access-Control-Allow-Origin', 'http://localhost:3000');
+  headers.append('Access-Control-Allow-Credentials', 'true');
+  headers.append('GET', 'POST');
+
+  useEffect(() => {
+      fetch('http://localhost:3000/categories', {
+        mode: 'no-cors',
+        credentials: 'include',
+        method: 'GET',
+        headers: headers
+      })
+      .then( response => response.json())
+      .then((data: Category[]) => {
+        setCategory(data)
+          }
+      )
+
+  });
 
   return (
     <>
@@ -21,6 +51,13 @@ function Filtros() {
                   <input id="historia" type="checkbox"/>
                   <label htmlFor="historia">Historia</label>
                 </div>
+                
+                  {category.map( category => (
+                  
+                      <CategoryElement key ={category.nombreGenero}  nombreGenero={category.nombreGenero} idGenero={category.idGenero} subGeneros={category.subGeneros} ></CategoryElement>
+
+                  ))}
+
             </div>
             <div className="filtros-editorial">
                 <h2 id="tituloFiltro">Editorial</h2>
