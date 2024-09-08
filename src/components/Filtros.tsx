@@ -3,12 +3,12 @@ import '../styles/estilos_home.css'
 import CategoryElement from './CategoryElement';
 
 interface Category {
-    idGenero: string;
-    nombreGenero: string;
-    subGeneros: string[];
+  idGenero: string;
+  nombreGenero: string;
+  subGeneros: string[];
 }
 function Filtros() {
-  const [category, setCategory] = useState<Category[]>([]);
+  const [category, setCategory] = useState<Response[]>([]);
   const headers = new Headers();
 
   headers.append('Content-Type', 'application/json');
@@ -18,19 +18,30 @@ function Filtros() {
   headers.append('GET', 'POST');
 
   useEffect(() => {
-      fetch('http://localhost:3000/categories', {
-        mode: 'no-cors',
-        credentials: 'include',
-        method: 'GET',
-        headers: headers
-      })
-      .then( response => response.json())
-      .then((data: Category[]) => {
-        setCategory(data)
-          }
-      )
 
-  });
+    async function getCategories(){
+      try {
+        const response = await fetch('http://localhost:3000/categories', {
+          mode: 'no-cors',
+          credentials: 'include',
+          method: 'GET',
+          headers: headers
+        });
+        console.log(response);
+        if(!response.ok){
+          console.log('No pudimos obtener los productos');
+        }
+        const productsJson = await response.json();
+        console.log(productsJson) 
+        setCategory(productsJson);
+
+      } catch (error) {
+        console.log('Error al obtener los productos');
+      }
+    }
+
+    getCategories();
+  }, []);
 
   return (
     <>
