@@ -8,35 +8,61 @@ interface Category {
   subGeneros: string[];
 }
 function Filtros() {
-  const [category, setCategory] = useState<Response[]>([]);
+  const [category, setCategory] = useState<Category[]>([]);
+
+  const [categoryExist, setCategoryExist] = useState<boolean>(false);
+
   const headers = new Headers();
 
-  headers.append('Content-Type', 'application/json');
-  headers.append('Accept', 'application/json');
-  headers.append('Access-Control-Allow-Origin', 'http://localhost:3000');
-  headers.append('Access-Control-Allow-Credentials', 'true');
-  headers.append('GET', 'POST');
+  headers.append('Content-Type', '*/*');
+  headers.append('Accept', '*/*');
+  headers.append('Access-Control-Allow-Origin', 'http://127.0.0.1:3000/');
+   headers.append('Access-Control-Allow-Credentials', 'true');
+  //headers.append('GET', 'POST');
+
+  /*const makeAPICall = async () => {
+    {
+      const response = await fetch('127.0.0.1:3000/categories', {mode:'no-cors', headers: headers});
+      debugger;
+      const data = await response.json();
+      debugger;
+      console.log({ data });
+  }};*/
+
+ /* useEffect(() => {
+    fetch('/categories-back')
+        .then(response => response.json())
+        .then((data: Category[]) => {
+          setCategory(data);
+          setCategoryExist(true);
+        });
+        //makeAPICall();
+}, []);*/
+
 
   useEffect(() => {
 
     async function getCategories(){
       try {
-        const response = await fetch('http://localhost:3000/categories', {
+        const response = await fetch('/categories-back', {
           mode: 'no-cors',
-          credentials: 'include',
-          method: 'GET',
-          headers: headers
+          method: 'GET'
         });
-        console.log(response);
-        if(!response.ok){
+        console.log(response.status);
+        if(!response.statusText){
           console.log('No pudimos obtener los productos');
+          setCategoryExist(false);
+
         }
         const productsJson = await response.json();
-        console.log(productsJson) 
+        
+        console.log(productsJson);
         setCategory(productsJson);
+        setCategoryExist(true);
 
       } catch (error) {
         console.log('Error al obtener los productos');
+        setCategoryExist(false);
       }
     }
 
@@ -63,11 +89,12 @@ function Filtros() {
                   <label htmlFor="historia">Historia</label>
                 </div>
                 
-                  {category.map( category => (
-                  
+                { categoryExist ? category.map( category => (
                       <CategoryElement key ={category.nombreGenero}  nombreGenero={category.nombreGenero} idGenero={category.idGenero} subGeneros={category.subGeneros} ></CategoryElement>
-
-                  ))}
+                  )) 
+                  :
+                  <p>No hay nada</p>
+                  }
 
             </div>
             <div className="filtros-editorial">

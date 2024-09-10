@@ -1,13 +1,14 @@
-import icono_imagen from '../assets/images/icono_imagen.png'
 import estrella2 from '../assets/images/estrella2.png'
 import '../styles/estilos_home.css'
-import { CrearProductoEntrada } from '../interfaces/CrearProductoEntrada'
 
-/* interface CajaProductoProps {
-  libro: CrearProductoEntrada
-} */
+interface CajaProductoProps {
+  isbn: string;                // Si - ISBN del libro  
+  nombre: string;              // Si - Nombre del libro
+  autor: string[];             // Si - Autor del libro (array de strings)
+  precio: number;
 
-function CajaProducto(/* props: CajaProductoProps */) {
+}
+function CajaProducto(props: CajaProductoProps) {
 
   return (
     <>
@@ -18,8 +19,8 @@ function CajaProducto(/* props: CajaProductoProps */) {
             </div>
           </a>
           <div className="textoLibroHome">
-            <p>Título del libro {/* {props.libro.nombre} */}</p>
-            <p>Autor del libro {/* {props.libro.autor} */}</p>
+            <p>{props.nombre} </p>
+            <p>{props.autor}</p>
           <div className='caja-estrellas'>
             {/* {estrellas según reseñas} */}
             <img src={estrella2} alt="casilifación según estrellas" />
@@ -29,7 +30,7 @@ function CajaProducto(/* props: CajaProductoProps */) {
             <img src={estrella2} alt="casilifación según estrellas" />
           </div>
           <div className='caja-precio-boton'>
-            <p>$25.990 {/* ${props.libro.precio} */}</p>
+            <p>{props.precio}</p>
             <button type="button">Comprar</button>
           </div>
           </div>

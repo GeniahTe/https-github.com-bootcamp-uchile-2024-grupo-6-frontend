@@ -1,9 +1,9 @@
-interface CrearProductoEntrada {
+interface ILibro {
     isbn: string;                // Si - ISBN del libro  
     nombre: string;              // Si - Nombre del libro
     autor: string[];             // Si - Autor del libro (array de strings)
-    stockLibro: number;          // Si - Cantidad en stock
     precio: number;              // Si -  Precio del libro
+    stockLibro: number;          // Si - Cantidad en stock
     genero: string[];            // Si - Géneros del libro (array de strings)
     editorial: string;           // Si - Editorial del libro
     idioma: string;              // Si - Idioma del libro
@@ -18,4 +18,4 @@ interface CrearProductoEntrada {
     calificacion: number // Agregar para vista de productos
 }
 
-export type {CrearProductoEntrada}
+export type {ILibro}
